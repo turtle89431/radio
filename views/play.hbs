@@ -1,0 +1,13 @@
+<audio src=""></audio>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var port = '//:' + {{ port }}
+    console.log(port)
+    var socket = io(port);
+    socket.on('voice', function (arrayBuffer) {
+        var blob = new Blob([arrayBuffer], { 'type': 'audio/ogg; codecs=opus' });
+        var audio = document.querySelector('audio');
+        audio.src = window.URL.createObjectURL(blob);
+        audio.play();
+    });
+</script>
